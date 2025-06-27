@@ -5,7 +5,7 @@ import numpy as np
 
 class System:
 
-    def __init__(self, name:str, bodies:List[Body], timestep:float, camera_distance:float, G=6.6743e-11) -> None:
+    def __init__(self, name:str, bodies:List[Body], timestep:float, camera_centre, G=6.6743e-11) -> None:
         
         # system property
         self.name = name
@@ -13,6 +13,14 @@ class System:
         self.dt = timestep
         self.G = G
         self.time = 0
+
+        # GUI
+        if isinstance(camera_centre, int) and camera_centre in range(len(self.bodies)):
+            self.camera_centre = self.bodies[camera_centre]
+        elif isinstance(camera_centre, np.ndarray):
+            self.camera_centre = camera_centre
+        else:
+            self.camera_centre = np.array([0, 0, 0])
 
         # array
         self.time_array = [0]

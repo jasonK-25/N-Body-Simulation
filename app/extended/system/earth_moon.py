@@ -12,4 +12,4 @@ class EarthMoonCircularApprox(System):
             Earth([0, 0, 0], [0, 0, 0]),
             Moon([3.844e8, 0, 0], [0, 1022, 0])
         ]
-        super().__init__("Earth Moon", bodies, self.TIMESTEP, self.G)
+        super().__init__("Earth Moon", bodies, self.TIMESTEP, 0, self.G)

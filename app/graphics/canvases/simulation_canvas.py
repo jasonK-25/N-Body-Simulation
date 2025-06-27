@@ -1,26 +1,31 @@
 from vispy.scene import SceneCanvas, TurntableCamera
 from ...base.system import System
 import numpy as np
+from .. import scalars
+from ...base.body import Body
 
 
 class SimulationCanvas:
 
     def __init__(self, system:System) -> None:
         self.system = system
+        self.scalar = 10 * scalars.AU
         self.canvas = SceneCanvas(keys="interactive")
 
         self.view = self.canvas.central_widget.add_view()
         self.view.camera = TurntableCamera()
+        #self.view.camera = PanZoomCamera()
         
         for i in range(len(self.system.bodies)):
             body = self.system.bodies[i]
 
             body.scatter.parent = self.view.scene
             #body.scatter.transform.translate(body.r.reshape(1, 3))
-            body.scatter.set_data(body.r.reshape(1, 3), size=body.scatter.size, face_color=body.scatter.colour)
+            body.scatter.set_data((body.r / self.scalar).reshape(1, 3), size=body.scatter.size, face_color=body.scatter.colour)
 
             body.trail.line.parent = self.view.scene
-            body.trail.line.set_data(np.stack(body.trail.r_array),  color=body.trail.colour, width=body.trail.width)
+            trail_r_array = np.vstack(body.trail.r_array)
+            body.trail.line.set_data(np.stack(trail_r_array / self.scalar),  color=body.trail.colour, width=body.trail.width)
             
         self.view.camera.set_range()
         self.view.camera.center = (0, 0, 0)
@@ -29,8 +34,14 @@ class SimulationCanvas:
         
         for i in range(len(self.system.bodies)):
             body = self.system.bodies[i]
-            body.scatter.set_data(body.r.reshape(1, 3), size=body.scatter.size, face_color=body.scatter.colour)
+            body.scatter.set_data((body.r / self.scalar).reshape(1, 3), size=body.scatter.size, face_color=body.scatter.colour)
             #body.scatter.transform.translate(body.r.reshape(1, 3))
             #body.scatter.update()
-            body.trail.line.set_data(np.stack(body.trail.r_array), color=body.trail.colour, width=body.trail.width) 
+
+            trail_r_array = np.vstack(body.trail.r_array)
+            body.trail.line.set_data(np.stack(trail_r_array / self.scalar), color=body.trail.colour, width=body.trail.width) 
             
+            if isinstance(self.system.camera_centre, Body):
+                self.view.camera.center = self.system.camera_centre.r / self.scalar
+            else:
+                self.view.camera.center = self.system.camera_centre

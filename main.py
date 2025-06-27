@@ -18,6 +18,6 @@ if __name__ == "__main__":
         system.update()
         sim_canvas.update()
 
-    timer = Timer(1/60, connect=update_all, start=True)
+    timer = Timer(1/60, connect=update_all, start=True, iterations=-1)
     main_win.show()
     app.run()

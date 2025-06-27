@@ -12,4 +12,4 @@ class TwoEarth(System):
             Earth([-4.2227e7 / 2, 0, 0], [0, -3070 / 2, 0]),
             Earth([4.2227e7 / 2, 0, 0], [0, 3070 / 2, 0]),
         ]
-        super().__init__("Two Earth", bodies, self.TIMESTEP, self.G)
+        super().__init__("Two Earth", bodies, self.TIMESTEP, None, self.G)

@@ -6,7 +6,6 @@ class SunEarthMoonCircularApprox(System):
 
     TIMESTEP = 60 * 60 * 24
     G = 6.6743e-11
-    CAMERA_DISTANCE = 2e11
 
     def __init__(self) -> None:
         bodies = [
@@ -14,7 +13,7 @@ class SunEarthMoonCircularApprox(System):
             Earth([1.496e11, 0, 0], [0, 29780, 0]),
             Moon([1.496e11 + 3.844e8, 0, 0], [0, 29780 + 1022, 0])
         ]
-        super().__init__("Sun Earth Moon", bodies, self.TIMESTEP, self.CAMERA_DISTANCE, self.G)
+        super().__init__("Sun Earth Moon", bodies, self.TIMESTEP, 1, self.G)
 
 
 class SunEarthMoonRealistic(System):#
@@ -22,7 +21,6 @@ class SunEarthMoonRealistic(System):#
 
     TIMESTEP = 60 * 60 * 24
     G = 6.6743e-11
-    CAMERA_DISTANCE = 2e11
 
     def __init__(self) -> None:
         bodies = [
@@ -30,5 +28,5 @@ class SunEarthMoonRealistic(System):#
             Earth([-3.441e10, 1.4302e11, -7.7097e6], [-2.9453e4, -7.0904e3, -4.5975e-1]),
             Moon([-3.4073e10, 1.4286e11, -2.1878e7], [-2.902e4, -6.1362e3, 8.3538e-2])
         ]
-        super().__init__("Sun Earth Moon", bodies, self.TIMESTEP, self.CAMERA_DISTANCE, self.G)
+        super().__init__("Sun Earth Moon", bodies, self.TIMESTEP, 1, self.G)
 
