@@ -1,4 +1,5 @@
 from vispy.scene import SceneCanvas, TurntableCamera
+from vispy import scene, color
 from ...base.system import System
 import numpy as np
 from .. import scalars
@@ -15,7 +16,7 @@ class SimulationCanvas:
         self.view = self.canvas.central_widget.add_view()
         self.view.camera = TurntableCamera()
         #self.view.camera = PanZoomCamera()
-        
+
         for i in range(len(self.system.bodies)):
             body = self.system.bodies[i]
 
