@@ -1,21 +1,23 @@
 from app.extended.system import *
-from app.graphics.canvas import Canvas
+from app.graphics.canvases import SimulationCanvas
 from app.graphics.control_panel import ControlPanel
-from app.graphics.window import MainWindow
+from app.graphics.main_window import MainWindow
 from vispy.app import use_app, Timer
 
-system = SunEarthMoonRealistic()
 
 if __name__ == "__main__":
+    system = SunEarthMoonRealistic()
+
     app = use_app("pyqt5")
     app.create()
 
-    canvas = Canvas(system)
-    win = MainWindow(canvas)
-    
-    timer = Timer(1/60, connect=canvas.update, start=True)
-    #for _ in range(365):
-    #    canvas.update(None)
+    sim_canvas = SimulationCanvas(system)
+    main_win = MainWindow(sim_canvas)
 
-    win.show()
+    def update_all(timer_event):
+        system.update()
+        sim_canvas.update()
+
+    timer = Timer(1/60, connect=update_all, start=True)
+    main_win.show()
     app.run()

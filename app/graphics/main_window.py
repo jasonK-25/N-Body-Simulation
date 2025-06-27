@@ -15,7 +15,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.canvas = canvas
         main_layout.addWidget(self.canvas.canvas.native)
 
-        # init panel
+        # init control panel
         self.control_panel = ControlPanel(self.canvas.system)
         main_layout.addWidget(self.control_panel)
         

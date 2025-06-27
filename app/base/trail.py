@@ -11,6 +11,9 @@ class Trail:
         self.line = Line(color=colour, width=width)
 
     def append(self, r) -> None:
+
+        # limit trail length
         if len(self.r_array) >= self.length:
             self.r_array.pop(0)
+            
         self.r_array.append(r)

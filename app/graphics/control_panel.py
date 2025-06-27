@@ -6,7 +6,7 @@ class ControlPanel(QtWidgets.QWidget):
 
     def __init__(self, system:System, parent=None):
         super().__init__(parent)
-        self.setFixedWidth(250)
+        self.setFixedWidth(280)
         layout = QtWidgets.QVBoxLayout()
 
         # G 

@@ -1,12 +1,11 @@
 from vispy.scene.visuals import Markers
-from vispy import scene
 
 
 class Scatter(Markers):
 
-    def __init__(self, size:int, face_colour:str):
+    def __init__(self, size:int, colour:str):
         self.size = size
-        self.face_colour = face_colour
+        self.colour = colour
 
         super().__init__()
         

@@ -1,6 +1,6 @@
 from ...base.system import System
-from ..body import Earth
-from ..body import Sun
+from ..body import Earth, Sun
+
         
 class SunEarthCircularApprox(System):
 
