@@ -42,7 +42,7 @@ class SimulationCanvas:
             trail_r_array = np.vstack(body.trail.r_array)
             body.trail.line.set_data(np.stack(trail_r_array / self.scalar), color=body.trail.colour, width=body.trail.width) 
             
-            if isinstance(self.system.camera_centre, Body):
-                self.view.camera.center = self.system.camera_centre.r / self.scalar
+            if self.system.camera_centre_body_index in range(len(self.system.bodies)):
+                self.view.camera.center = self.system.bodies[self.system.camera_centre_body_index].r / self.scalar
             else:
-                self.view.camera.center = self.system.camera_centre
+                self.view.camera.center = np.array([0, 0, 0])

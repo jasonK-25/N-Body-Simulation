@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import Qt
 from .control_panel import ControlPanel
 
 
@@ -17,8 +18,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # init control panel
         self.control_panel = ControlPanel(self.canvas.system)
-        main_layout.addWidget(self.control_panel)
-        
+        main_layout.addWidget(self.control_panel, alignment=Qt.AlignmentFlag.AlignTop)
+
         central_widget.setLayout(main_layout)
         self.setCentralWidget(central_widget)
 
