@@ -9,6 +9,7 @@ import numpy as np
 class ControlPanel(QtWidgets.QWidget):
     
     def build_system_grp_box(self) -> QtWidgets.QGroupBox:
+        
         # system group box
         system_grp_box = QtWidgets.QGroupBox(title="System Properties")
         system_grp_box.setObjectName("parentGroupBox")
