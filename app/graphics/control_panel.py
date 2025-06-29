@@ -7,6 +7,36 @@ import numpy as np
 
 
 class ControlPanel(QtWidgets.QWidget):
+
+    def __init__(self, system:System, parent=None):
+        self.system = system
+        super().__init__(parent)
+        #self.setMaximumWidth(450)
+        
+        self.setObjectName("controlPanel")
+        self.setStyleSheet(utils.load_css("app/graphics/stylesheets/control_panel/global.css"))
+
+        layout = QtWidgets.QVBoxLayout()
+        self.setLayout(layout)
+
+        # system group box
+        system_grp_box = self.build_system_grp_box()
+        layout.addWidget(system_grp_box)
+
+        # bodies group box
+        bodies_grp_box = self.build_bodies_grp_box()
+
+        # init body mass widgets
+        for i in range(len(system.bodies)):
+            
+            # body group box
+            body_grp_box = self.build_body_grp_box(system.bodies[i])
+
+            # add body groupbox to parent 
+            bodies_grp_box.layout().addWidget(body_grp_box)
+
+        bodies_scroll_area = self.build_bodies_scroll_area(bodies_grp_box)
+        layout.addWidget(bodies_scroll_area)
     
     def build_system_grp_box(self) -> QtWidgets.QGroupBox:
         
@@ -84,33 +114,5 @@ class ControlPanel(QtWidgets.QWidget):
         return body_grp_box
 
 
-    def __init__(self, system:System, parent=None):
-        self.system = system
-        super().__init__(parent)
-        #self.setMaximumWidth(450)
-        
-        self.setObjectName("controlPanel")
-        self.setStyleSheet(utils.load_css("app/graphics/stylesheets/control_panel/global.css"))
-
-        layout = QtWidgets.QVBoxLayout()
-        self.setLayout(layout)
-
-        # system group box
-        system_grp_box = self.build_system_grp_box()
-        layout.addWidget(system_grp_box)
-
-        # bodies group box
-        bodies_grp_box = self.build_bodies_grp_box()
-
-        # init body mass widgets
-        for i in range(len(system.bodies)):
-            
-            # body group box
-            body_grp_box = self.build_body_grp_box(system.bodies[i])
-
-            # add body groupbox to parent 
-            bodies_grp_box.layout().addWidget(body_grp_box)
-
-        bodies_scroll_area = self.build_bodies_scroll_area(bodies_grp_box)
-        layout.addWidget(bodies_scroll_area)
+    
         
