@@ -5,7 +5,7 @@ import numpy as np
 
 class System:
 
-    def __init__(self, name:str, bodies:List[Body], timestep:float, camera_centre_body_index:int, G=6.6743e-11) -> None:
+    def __init__(self, name:str, bodies:List[Body], timestep:float, camera_centre_body_index:int, plot_scale:float, G=6.6743e-11, camera_centre_pos_fixed=None) -> None:
         
         # system property
         self.name = name
@@ -16,6 +16,8 @@ class System:
 
         # GUI
         self.camera_centre_body_index = camera_centre_body_index
+        self.camera_centre_pos_fixed = camera_centre_pos_fixed
+        self.plot_scale = plot_scale
 
         # array
         self.time_array = [0]

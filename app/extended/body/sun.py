@@ -9,7 +9,7 @@ class Sun(Body):
     def __init__(self, init_pos:list, init_vel:list, plot_size=40, colour="orange") -> None:
         super().__init__("Sun", 1.9889e30, init_pos, init_vel, 
         scatter=Scatter(size=plot_size, colour=colour),
-        trail=Trail((255/255, 182/255, 0, 1)),
+        trail=Trail((1, 1, 1, 1)),
         gpe_line=Line("red", 5), ke_line=Line("green", 5), tot_energy_line=Line("blue", 5))
     
 ## sphere

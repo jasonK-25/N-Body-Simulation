@@ -1,5 +1,6 @@
 from ...base.system import System
 from ..body import Earth, Sun, Moon
+from ...graphics import scalars
 
         
 class SunEarthMoonCircularApprox(System):
@@ -13,7 +14,7 @@ class SunEarthMoonCircularApprox(System):
             Earth([1.496e11, 0, 0], [0, 29780, 0]),
             Moon([1.496e11 + 3.844e8, 0, 0], [0, 29780 + 1022, 0])
         ]
-        super().__init__("Sun Earth Moon", bodies, self.TIMESTEP, 1, self.G)
+        super().__init__("Sun Earth Moon", bodies, self.TIMESTEP, 1, scalars.AU, self.G)
 
 
 class SunEarthMoonRealistic(System):#
@@ -28,5 +29,5 @@ class SunEarthMoonRealistic(System):#
             Earth([-3.441e10, 1.4302e11, -7.7097e6], [-2.9453e4, -7.0904e3, -4.5975e-1]),
             Moon([-3.4073e10, 1.4286e11, -2.1878e7], [-2.902e4, -6.1362e3, 8.3538e-2])
         ]
-        super().__init__("Sun Earth Moon", bodies, self.TIMESTEP, 1, self.G)
+        super().__init__("Sun Earth Moon", bodies, self.TIMESTEP, 1, scalars.AU, self.G)
 
