@@ -12,8 +12,7 @@ parent
     bodies
         add_body_button
         body1   delete_button
-            m m_textbox
-            colour colour_textbox
+            SSSSSextbox
             trail_colour trail_colour_textbox
             trail_width trail_width_textbox
             x x_textbox

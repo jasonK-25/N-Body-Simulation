@@ -6,18 +6,22 @@ from vispy.app import use_app, Timer
 
 
 if __name__ == "__main__":
-    system = SunEarthMoonRealistic()
 
+    # initialise system
+    system = TwoEarth()
+
+    # create app
     app = use_app("pyqt5")
     app.create()
-
+    
     sim_canvas = SimulationCanvas(system)
-    main_win = MainWindow(sim_canvas)
 
     def update_all(timer_event):
         system.update()
         sim_canvas.update()
 
     timer = Timer(1/60, connect=update_all, start=True, iterations=-1)
+    main_win = MainWindow(sim_canvas, timer)    
+
     main_win.show()
     app.run()

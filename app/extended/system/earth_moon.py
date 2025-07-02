@@ -13,4 +13,5 @@ class EarthMoonCircularApprox(System):
             Earth([0, 0, 0], [0, 0, 0]),
             Moon([3.844e8, 0, 0], [0, 1022, 0])
         ]
-        super().__init__("Earth Moon", bodies, self.TIMESTEP, 0, scalars.M, self.G)
+        super().__init__(name="Earth Moon", bodies=bodies, timestep=self.TIMESTEP, 
+        camera_centre=self.bodies[0], plot_scale=scalars.M, G=self.G)

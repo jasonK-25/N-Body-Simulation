@@ -13,34 +13,33 @@ class SimulationCanvas:
 
         self.view = self.canvas.central_widget.add_view()
         self.view.camera = TurntableCamera()
-        #self.view.camera = PanZoomCamera()
 
+        # place scatters and trails on canvas
         for i in range(len(self.system.bodies)):
             body = self.system.bodies[i]
 
             body.scatter.parent = self.view.scene
-            #body.scatter.transform.translate(body.r.reshape(1, 3))
-            body.scatter.set_data((body.r / self.system.plot_scale).reshape(1, 3), size=body.scatter.size, face_color=body.scatter.colour)
-
             body.trail.line.parent = self.view.scene
-            trail_r_array = np.vstack(body.trail.r_array)
-            body.trail.line.set_data(np.stack(trail_r_array / self.system.plot_scale),  color=body.trail.colour, width=body.trail.width)
-            
-        self.view.camera.set_range()
-        self.view.camera.center = (0, 0, 0)
 
+        self.update()
+        self.view.camera.set_range()
+            
     def update(self) -> None:
         
         for i in range(len(self.system.bodies)):
             body = self.system.bodies[i]
+
+            # plot body
             body.scatter.set_data((body.r / self.system.plot_scale).reshape(1, 3), size=body.scatter.size, face_color=body.scatter.colour)
             #body.scatter.transform.translate(body.r.reshape(1, 3))
             #body.scatter.update()
 
+            # plot trail
             trail_r_array = np.vstack(body.trail.r_array)
             body.trail.line.set_data(np.stack(trail_r_array / self.system.plot_scale), color=body.trail.colour, width=body.trail.width) 
             
-            if self.system.camera_centre_body_index in range(len(self.system.bodies)):
-                self.view.camera.center = self.system.bodies[self.system.camera_centre_body_index].r / self.system.plot_scale
+            # set camera centre
+            if isinstance(self.system.camera_centre, Body):
+                self.view.camera.center = self.system.camera_centre.r / self.system.plot_scale
             else:
-                self.view.camera.center = self.system.camera_centre_pos_fixed / self.system.plot_scale
+                self.view.camera.center = self.system.camera_centre / self.system.plot_scale

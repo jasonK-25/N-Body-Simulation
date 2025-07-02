@@ -5,7 +5,8 @@ from .control_panel import ControlPanel
 
 class MainWindow(QtWidgets.QMainWindow):
 
-    def __init__(self, canvas, *args, **kwargs) -> None:
+    def __init__(self, canvas, timer, *args, **kwargs) -> None:
+        self.timer = timer
         super().__init__(*args, **kwargs)
 
         # init central widget and layout
@@ -17,7 +18,7 @@ class MainWindow(QtWidgets.QMainWindow):
         main_layout.addWidget(self.canvas.canvas.native)
 
         # init control panel
-        self.control_panel = ControlPanel(self.canvas.system)
+        self.control_panel = ControlPanel(self.canvas.system, self.timer)
         main_layout.addWidget(self.control_panel, alignment=Qt.AlignmentFlag.AlignTop)
 
         central_widget.setLayout(main_layout)

@@ -5,7 +5,7 @@ import numpy as np
 
 class System:
 
-    def __init__(self, name:str, bodies:List[Body], timestep:float, camera_centre_body_index:int, plot_scale:float, G=6.6743e-11, camera_centre_pos_fixed=None) -> None:
+    def __init__(self, name:str, bodies:List[Body], timestep:float, camera_centre, plot_scale:float, G=6.6743e-11, trails_visible=True) -> None:
         
         # system property
         self.name = name
@@ -15,15 +15,24 @@ class System:
         self.time = 0
 
         # GUI
-        self.camera_centre_body_index = camera_centre_body_index
-        self.camera_centre_pos_fixed = camera_centre_pos_fixed
+        self.camera_centre = camera_centre
         self.plot_scale = plot_scale
+        self.trails_visible = trails_visible
+        self.set_trails_visible(self.trails_visible)
 
         # array
         self.time_array = [0]
 
         # initial gravitation
         self.eval_gravitation()
+
+
+    def set_trails_visible(self, is_visiible) -> None:
+        self.trails_visible = is_visiible
+
+        for i in range(len(self.bodies)):
+            self.bodies[i].trail.set_visible(self.trails_visible)
+
 
     def cleanup(self):
 

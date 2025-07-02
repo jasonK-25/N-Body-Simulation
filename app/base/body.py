@@ -1,7 +1,7 @@
 import numpy as np
 from ..graphics.scatter import Scatter
 from ..graphics.line import Line
-from .trail import Trail
+from ..graphics.trail import Trail
 
 class Body:
 
@@ -13,6 +13,7 @@ class Body:
         self.init_pos = np.array(init_pos)
         self.init_vel = np.array(init_vel)
 
+        # current state
         self.r = self.init_pos
         self.v = self.init_vel
         self.a = np.array([0, 0, 0])
