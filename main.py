@@ -14,12 +14,14 @@ if __name__ == "__main__":
     app = use_app("pyqt5")
     app.create()
     
+    # create canvas
     sim_canvas = SimulationCanvas(system)
 
     def update_all(timer_event):
         system.update()
         sim_canvas.update()
-
+    
+    # start timer
     timer = Timer(1/60, connect=update_all, start=True, iterations=-1)
     main_win = MainWindow(sim_canvas, timer)    
 
