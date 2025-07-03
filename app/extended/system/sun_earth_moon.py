@@ -17,7 +17,7 @@ class SunEarthMoonCircularApprox(System):
         super().__init__(name="Sun Earth Moon", bodies=bodies, timestep=self.TIMESTEP, camera_centre=bodies[1], plot_scale=scalars.AU, G=self.G)
 
 
-class SunEarthMoonRealistic(System):#
+class SunEarthMoonRealistic(System):
     # 2025 Jan 04
 
     TIMESTEP = 60 * 60 * 24

@@ -1,9 +1,10 @@
 from vispy.scene.visuals import Line
+import numpy as np
 
 
 class Trail:
 
-    def __init__(self, colour:list, length=30, width=2) -> None:
+    def __init__(self, colour:np.ndarray, length=30, width=2) -> None:
         self.r_array = []
         self.colour = colour
         self.length = length

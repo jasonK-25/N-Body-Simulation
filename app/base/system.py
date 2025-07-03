@@ -1,7 +1,7 @@
 from .body import Body
 from typing import List
 import numpy as np
-
+import copy
 
 class System:
 
@@ -25,14 +25,12 @@ class System:
 
         # initial gravitation
         self.eval_gravitation()
-
-
+   
     def set_trails_visible(self, is_visiible) -> None:
         self.trails_visible = is_visiible
 
         for i in range(len(self.bodies)):
             self.bodies[i].trail.set_visible(self.trails_visible)
-
 
     def cleanup(self):
 

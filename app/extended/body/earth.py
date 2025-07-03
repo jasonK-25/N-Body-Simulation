@@ -2,14 +2,15 @@ from ...base.body import Body
 from ...graphics.trail import Trail
 from ...graphics.scatter import Scatter
 from ...graphics.line import Line
+import numpy as np
 
 
 class Earth(Body):
     
-    def __init__(self, init_pos:list, init_vel:list, name="Earth", plot_size=20, colour=[0, 0, 1, 1]) -> None:
+    def __init__(self, init_pos:list, init_vel:list, name="Earth", plot_size=20, colour=np.array([0, 0, 1, 1])) -> None:
         super().__init__(name, 5.972e24, init_pos, init_vel, 
         scatter=Scatter(size=plot_size, colour=colour),
-        trail=Trail([1, 1, 1, 1], 20), # light blue
+        trail=Trail(np.array([1, 1, 1, 1])), # light blue
         gpe_line=Line("red", 5), ke_line=Line("green", 5), tot_energy_line=Line("blue", 5)) 
     
 ## sphere
