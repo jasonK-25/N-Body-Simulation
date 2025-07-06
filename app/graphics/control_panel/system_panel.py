@@ -129,7 +129,7 @@ class SystemPanel(QtWidgets.QWidget):
         # camera centre
         focus_text = self.focus_dropdown.currentText()
         if focus_text == "Custom":
-            focus_pos = float(self.custom_focus_textboxes[i].text() for i in range(3))
+            focus_pos = [float(self.custom_focus_textboxes[i].text()) for i in range(3)]
             self.system.camera_centre = np.array(focus_pos)
         else:
             focus = self.system.bodies[self.focus_dropdown.currentIndex()]

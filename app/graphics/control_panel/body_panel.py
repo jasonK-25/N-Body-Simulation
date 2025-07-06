@@ -96,3 +96,9 @@ class BodyPanel(QtWidgets.QGroupBox):
         # velocity
         v = [float(self.v_textboxes[i].text()) for i in range(3)]
         self.body.v = np.array(v)
+
+    def update_r_v(self) -> None:
+        for i in range(3):
+            self.r_textboxes[i].setText(f"{self.body.r[i]:.4e}")
+            self.v_textboxes[i].setText(f"{self.body.v[i]:.4e}")
+    

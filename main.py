@@ -20,6 +20,7 @@ if __name__ == "__main__":
     def update_all(timer_event):
         system.update()
         sim_canvas.update()
+        main_win.control_panel.bodies_panel.update_body_r_v()
     
     # start timer
     timer = Timer(1/60, connect=update_all, start=True, iterations=-1)
