@@ -1,8 +1,8 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
-from ...base.body import Body
-import numpy as np
+from ....base.body import Body
 from ..colour_button import ColourButton
+import numpy as np
 
 
 class BodyPanel(QtWidgets.QGroupBox):
@@ -23,7 +23,7 @@ class BodyPanel(QtWidgets.QGroupBox):
 
         # plot colour
         self.layout().addWidget(QtWidgets.QLabel("Plot Colour:"), 2, 0, 1, 2)
-        self.plot_colour_button = ColourButton(255 * self.body.scatter.colour)
+        self.plot_colour_button = ColourButton(255 * self.body.plot.colour)
         self.plot_colour_button.clicked.connect(self.change_plot_colour)
         self.layout().addWidget(self.plot_colour_button, 2, 2, 1, 2)
 
@@ -39,24 +39,23 @@ class BodyPanel(QtWidgets.QGroupBox):
         self.layout().addWidget(self.trail_width_textbox, 4, 2, 1, 2)
 
         # position
-        self.r_labels = [QtWidgets.QLabel("x"), QtWidgets.QLabel("y"),  QtWidgets.QLabel("z")]
-        self.r_textboxes = [QtWidgets.QLineEdit(f"{self.body.r[0]:.4e}"), QtWidgets.QLineEdit(f"{self.body.r[1]:.4e}"), QtWidgets.QLineEdit(f"{self.body.r[2]:.4e}")]
-        
+        self.pos_labels = [QtWidgets.QLabel("x"), QtWidgets.QLabel("y"),  QtWidgets.QLabel("z")]
+        self.pos_textboxes = [QtWidgets.QLineEdit(f"{self.body.pos[i]:.4e}") for i in range(3)]
+
         for i in range(3):
-            self.r_textboxes[i].setObjectName("smallLineEdit")
-            self.layout().addWidget(self.r_labels[i], 5 + i, 0)
-            self.layout().addWidget(self.r_textboxes[i], 5 + i, 1)
+            self.pos_textboxes[i].setObjectName("smallLineEdit")
+            self.layout().addWidget(self.pos_labels[i], 5 + i, 0)
+            self.layout().addWidget(self.pos_textboxes[i], 5 + i, 1)
 
         # velocity
-        self.v_labels = [QtWidgets.QLabel("vx"), QtWidgets.QLabel("vy"),  QtWidgets.QLabel("vz")]
-        self.v_textboxes = [QtWidgets.QLineEdit(f"{self.body.v[0]:.4e}"), QtWidgets.QLineEdit(f"{self.body.v[1]:.4e}"), QtWidgets.QLineEdit(f"{self.body.v[2]:.4e}")]
+        self.vel_labels = [QtWidgets.QLabel("vx"), QtWidgets.QLabel("vy"),  QtWidgets.QLabel("vz")]
+        self.vel_textboxes = [QtWidgets.QLineEdit(f"{self.body.vel[i]:.4e}") for i in range(3)]
 
         for i in range(3):
-            self.v_textboxes[i].setObjectName("smallLineEdit")
-            self.layout().addWidget(self.v_labels[i], 5 + i, 2)
-            self.layout().addWidget(self.v_textboxes[i], 5 + i, 3)
+            self.vel_textboxes[i].setObjectName("smallLineEdit")
+            self.layout().addWidget(self.vel_labels[i], 5 + i, 2)
+            self.layout().addWidget(self.vel_textboxes[i], 5 + i, 3)
 
-        # apply button
         self.apply_button = QtWidgets.QPushButton(text="Apply")
         self.apply_button.clicked.connect(self.apply)
         self.layout().addWidget(self.apply_button, 8, 3, 1, 1, alignment=Qt.AlignmentFlag.AlignRight)
@@ -68,12 +67,10 @@ class BodyPanel(QtWidgets.QGroupBox):
 
     def change_plot_colour(self) -> None:
         colour = self.get_new_colour()
-        #self.body.scatter.colour = colour / 255
         self.plot_colour_button.set_colour(colour)
 
     def change_trail_colour(self) -> None:
         colour = self.get_new_colour()
-        #self.body.trail.colour = colour / 255
         self.trail_colour_button.set_colour(colour)
 
     def apply(self) -> None:
@@ -81,7 +78,7 @@ class BodyPanel(QtWidgets.QGroupBox):
         self.body.mass = float(self.m_textbox.text())
 
         # plot colour
-        self.body.scatter.colour = self.plot_colour_button.colour / 255
+        self.body.plot.colour = self.plot_colour_button.colour / 255
 
         # trail colour
         self.body.trail.colour = self.trail_colour_button.colour / 255
@@ -90,15 +87,16 @@ class BodyPanel(QtWidgets.QGroupBox):
         self.body.trail.width = float(self.trail_width_textbox.text())
         
         # position
-        r = [float(self.r_textboxes[i].text()) for i in range(3)]
-        self.body.r = np.array(r)
+        r = [float(self.pos_textboxes[i].text()) for i in range(3)]
+        self.body.pos = np.array(r)
 
         # velocity
-        v = [float(self.v_textboxes[i].text()) for i in range(3)]
-        self.body.v = np.array(v)
+        v = [float(self.vel_textboxes[i].text()) for i in range(3)]
+        self.body.vel = np.array(v)
 
-    def update_r_v(self) -> None:
+    def update_r_v_texts(self) -> None:
         for i in range(3):
-            self.r_textboxes[i].setText(f"{self.body.r[i]:.4e}")
-            self.v_textboxes[i].setText(f"{self.body.v[i]:.4e}")
+            self.pos_textboxes[i].setText(f"{self.body.pos[i]:.4e}")
+            self.vel_textboxes[i].setText(f"{self.body.vel[i]:.4e}")
     
+ 

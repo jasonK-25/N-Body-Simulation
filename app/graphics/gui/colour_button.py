@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets
-from .. import utils
+from ..utils import utils
 
 class ColourButton(QtWidgets.QPushButton):
 
@@ -13,5 +13,4 @@ class ColourButton(QtWidgets.QPushButton):
             background-color: rgba({colour[0]}, {colour[1]}, {colour[2]}, {colour[3]});
         }}""")
         self.colour = colour
-        
         
