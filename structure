@@ -1,0 +1,29 @@
+parent
+    system
+        pause_button(change to play_button on clicked) reset_button
+        G G_textbox
+        focus focus_dropdown
+        custom_focus_textbox (only visible when "custom" is picked in the dropdown)
+        trail trail_checkbox
+        velocity velocity_checkbox
+        plot_scalar plot_scalar_textbox
+        apply_button
+
+    bodies
+        add_body_button
+        body1   delete_button
+            SSSSSextbox
+            trail_colour trail_colour_textbox
+            trail_width trail_width_textbox
+            x x_textbox
+            y y_textbox
+            z z_textbox
+            vx vx_textbox
+            vy vy_textbox
+            vz vz_textbox
+
+        body2 delete_button
+            same as above
+
+
+        

@@ -1,21 +1,15 @@
 from ...base.body import Body
-from ...base.trail import Trail
-from ...graphics.scatter import Scatter
+from ...graphics.base.scatter import Scatter
+from ...graphics.base.trail import Trail
+import numpy as np
 
 
 class Moon(Body):
-    
-    def __init__(self, init_pos:list, init_vel:list, name="Moon", plot_size=10, face_colour="white") -> None:
-        super().__init__(name, 7.348e22, init_pos, init_vel, 
-        scatter=Scatter(size=plot_size, face_colour=face_colour),
-        trail=Trail((1, 1, 1, 1)))
 
-# sphere
-#class Moon(Body):
-#    
-#    def __init__(self, init_pos:list, init_vel:list, name="Moon", colour="white") -> None:
-#        super().__init__(name, 7.348e22, init_pos, init_vel, 
-#        scatter=Scatter(radius=1738100, colour=colour),
-#        trail=Trail("white"))
+    def __init__(self, init_pos:list, init_vel:list, plot_colour=[1, 1, 1, 1], plot_size=10) -> None:
+        radius = 1.7381e6
+        super().__init__("Moon", 7.348e22, radius, init_pos, init_vel,
+        Scatter(size=10, colour=plot_colour),
+        Trail(colour=np.array([1, 1, 1, 1])))
 
-    
+        

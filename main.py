@@ -1,21 +1,38 @@
-from app.extended.system import *
-from app.graphics.canvas import Canvas
-from app.graphics.control_panel import ControlPanel
-from app.graphics.window import MainWindow
+from app.extended.system import SunEarthMoon, TwoEarthCollision
 from vispy.app import use_app, Timer
+from app.graphics.canvas.simulation import SimulationCanvas
+from app.graphics.gui.main_window import MainWindow
 
-system = SunEarthMoonRealistic()
 
 if __name__ == "__main__":
+
+    # init system
+    #system = TwoEarthCollision()
+    system = SunEarthMoon()
+    #print(system.get_collision_groups())
+    #exit()
+
+    # create app
     app = use_app("pyqt5")
     app.create()
 
-    canvas = Canvas(system)
-    win = MainWindow(canvas)
-    
-    timer = Timer(1/60, connect=canvas.update, start=True)
-    #for _ in range(365):
-    #    canvas.update(None)
+    # create canvas
+    sim_canvas = SimulationCanvas(system)
 
-    win.show()
+    def update(timer_event=None) -> None:
+        system.check_elastic_collision()
+        system.update()
+        sim_canvas.update()
+        main_win.control_panel.bodies_panel.update_body_r_v_texts()
+
+    # create timer
+    timer = Timer(1/60, connect=update, start=True, iterations=-1)
+
+    # create main window
+    main_win = MainWindow(sim_canvas, timer)
+
+    # start application
+    timer.start()
+    main_win.show()
     app.run()
+    
